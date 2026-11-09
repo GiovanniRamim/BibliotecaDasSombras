@@ -1,0 +1,24 @@
+<div class="tabela-container">
+  <p *ngIf="carregando" class="status">Carregando dados...</p>
+
+  <p *ngIf="erro" class="status erro">{{ erro }}</p>
+
+  <div *ngIf="dados && !carregando && !erro" class="tabela-wrapper">
+    <table *ngIf="dados.colunas.length > 0; else vazio">
+      <thead>
+        <tr>
+          <th *ngFor="let coluna of dados.colunas">{{ coluna }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let linha of dados.linhas">
+          <td *ngFor="let coluna of dados.colunas">{{ linha[coluna] }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #vazio>
+      <p class="status">A planilha não possui dados.</p>
+    </ng-template>
+  </div>
+</div>

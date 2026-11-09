@@ -1,0 +1,47 @@
+.tabela-container {
+  width: 100%;
+}
+
+.tabela-wrapper {
+  overflow-x: auto;
+  border: 1px solid #2a2f3a;
+  border-radius: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #181b22;
+}
+
+th,
+td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #2a2f3a;
+}
+
+th {
+  background-color: #222733;
+  color: #e6e6e6;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+td {
+  color: #c9d1d9;
+}
+
+tbody tr:hover {
+  background-color: #1f2430;
+}
+
+.status {
+  color: #9aa4b2;
+  font-style: italic;
+}
+
+.erro {
+  color: #ff7b72;
+}
