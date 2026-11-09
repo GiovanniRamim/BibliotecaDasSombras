@@ -15,5 +15,6 @@ export class NavHorizontalComponent {
     { rotulo: 'Mídias', rota: '/midias' },
     { rotulo: 'Música', rota: '/musica' },
     { rotulo: 'Blog', rota: '/blog' },
+    { rotulo: 'Lojas', rota: '/lojas' },
   ];
 }
