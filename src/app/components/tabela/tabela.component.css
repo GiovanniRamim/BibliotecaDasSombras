@@ -12,6 +12,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   background-color: #181b22;
+  table-layout: fixed;
 }
 
 th,
@@ -19,6 +20,10 @@ td {
   padding: 0.75rem 1rem;
   text-align: left;
   border-bottom: 1px solid #2a2f3a;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  vertical-align: top;
+  max-width: 0;
 }
 
 th {
@@ -77,4 +82,43 @@ tbody tr:hover {
 
 .erro {
   color: #ff7b72;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.item-botao {
+  max-width: 100%;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid #2a2f3a;
+  border-radius: 4px;
+  background-color: #222733;
+  color: #c9d1d9;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 10;
+  min-width: 220px;
+  max-width: 360px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #2a2f3a;
+  border-radius: 6px;
+  background-color: #222733;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.dropdown-menu a {
+  color: #58a6ff;
+  overflow-wrap: anywhere;
+  word-break: break-all;
 }

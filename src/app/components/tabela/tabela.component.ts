@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../services/data.service';
 import { TabelaDados } from '../../models/tabela-dados.model';
@@ -18,6 +18,9 @@ export class TabelaComponent implements OnChanges {
   carregando = false;
   erro: string | null = null;
 
+  /** Linha cujo menu de link está aberto, ou null. */
+  menuAberto: Record<string, string> | null = null;
+
   /** Filtro de pesquisa por coluna: { nomeDaColuna: termo } */
   filtros: Record<string, string> = {};
 
@@ -26,6 +29,7 @@ export class TabelaComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['caminho']) {
       this.filtros = {};
+      this.menuAberto = null;
       this.carregar();
     }
   }
@@ -47,12 +51,31 @@ export class TabelaComponent implements OnChanges {
     );
   }
 
+  get colunaLink(): string | null {
+    return this.dados?.colunas.find((c) => c.toLowerCase() === 'link') ?? null;
+  }
+
   atualizarFiltro(coluna: string, valor: string): void {
     this.filtros = { ...this.filtros, [coluna]: valor };
+    this.menuAberto = null;
   }
 
   limparFiltros(): void {
     this.filtros = {};
+    this.menuAberto = null;
+  }
+
+  alternarMenu(linha: Record<string, string>): void {
+    this.menuAberto = this.menuAberto === linha ? null : linha;
+  }
+
+  /** Fecha o menu ao clicar fora do dropdown. */
+  @HostListener('document:click', ['$event'])
+  fecharMenuAoClicarFora(event: Event): void {
+    const alvo = event.target as HTMLElement;
+    if (!alvo.closest('.dropdown')) {
+      this.menuAberto = null;
+    }
   }
 
   /** Remove acentos e diferencia maiúsculas/minúsculas para a comparação. */

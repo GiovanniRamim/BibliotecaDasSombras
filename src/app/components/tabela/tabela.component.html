@@ -24,7 +24,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let linha of linhasFiltradas">
-          <td *ngFor="let coluna of dados.colunas">{{ linha[coluna] }}</td>
+          <td *ngFor="let coluna of dados.colunas">
+            <ng-container *ngIf="coluna === colunaLink && linha[coluna]; else texto">
+              <div class="dropdown">
+                <button type="button" class="item-botao" (click)="alternarMenu(linha)">Links</button>
+                <div class="dropdown-menu" *ngIf="menuAberto === linha">
+                  <a [href]="linha[coluna]" target="_blank" rel="noopener noreferrer">{{linha[coluna]}}</a>
+                </div>
+              </div>
+            </ng-container>
+            <ng-template #texto>{{ linha[coluna] }}</ng-template>
+          </td>
         </tr>
         <tr *ngIf="linhasFiltradas.length === 0">
           <td [attr.colspan]="dados.colunas.length" class="status">
