@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-subsections',
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css',
+  templateUrl: './subsections.component.html',
+  styleUrl: './subsections.component.css',
 })
-export class NavbarComponent {
+export class SubsectionsComponent {
   links = [
     { rotulo: 'Literatura', rota: '/literatura' },
     { rotulo: 'Mídias', rota: '/midias' },

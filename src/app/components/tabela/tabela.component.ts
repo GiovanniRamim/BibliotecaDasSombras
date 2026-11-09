@@ -18,12 +18,50 @@ export class TabelaComponent implements OnChanges {
   carregando = false;
   erro: string | null = null;
 
+  /** Filtro de pesquisa por coluna: { nomeDaColuna: termo } */
+  filtros: Record<string, string> = {};
+
   constructor(private dataService: DataService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['caminho']) {
+      this.filtros = {};
       this.carregar();
     }
+  }
+
+  /** Linhas que atendem a todos os filtros preenchidos. */
+  get linhasFiltradas(): Record<string, string>[] {
+    if (!this.dados) return [];
+
+    const ativos = Object.entries(this.filtros)
+      .map(([coluna, termo]) => [coluna, this.normalizar(termo)] as const)
+      .filter(([, termo]) => termo.length > 0);
+
+    if (ativos.length === 0) return this.dados.linhas;
+
+    return this.dados.linhas.filter((linha) =>
+      ativos.every(([coluna, termo]) =>
+        this.normalizar(String(linha[coluna] ?? '')).includes(termo)
+      )
+    );
+  }
+
+  atualizarFiltro(coluna: string, valor: string): void {
+    this.filtros = { ...this.filtros, [coluna]: valor };
+  }
+
+  limparFiltros(): void {
+    this.filtros = {};
+  }
+
+  /** Remove acentos e diferencia maiúsculas/minúsculas para a comparação. */
+  private normalizar(texto: string): string {
+    return texto
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
   }
 
   private carregar(): void {

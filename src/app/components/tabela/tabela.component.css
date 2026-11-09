@@ -37,6 +37,39 @@ tbody tr:hover {
   background-color: #1f2430;
 }
 
+.linha-filtro th {
+  position: static;
+  padding: 0.5rem 0.75rem;
+  background-color: #1a1e26;
+}
+
+.filtro {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #2a2f3a;
+  border-radius: 4px;
+  background-color: #0d1117;
+  color: #e6e6e6;
+  font: inherit;
+  font-size: 0.85rem;
+}
+
+.filtro:focus {
+  outline: none;
+  border-color: #1f6feb;
+}
+
+.limpar {
+  margin-left: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid #2a2f3a;
+  border-radius: 4px;
+  background-color: #222733;
+  color: #c9d1d9;
+  cursor: pointer;
+}
+
 .status {
   color: #9aa4b2;
   font-style: italic;

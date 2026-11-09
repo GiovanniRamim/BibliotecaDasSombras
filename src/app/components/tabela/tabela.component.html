@@ -9,10 +9,28 @@
         <tr>
           <th *ngFor="let coluna of dados.colunas">{{ coluna }}</th>
         </tr>
+        <tr class="linha-filtro">
+          <th *ngFor="let coluna of dados.colunas">
+            <input
+              type="text"
+              class="filtro"
+              placeholder="Filtrar..."
+              [value]="filtros[coluna] ?? ''"
+              (input)="atualizarFiltro(coluna, $any($event.target).value)"
+              [attr.aria-label]="'Filtrar ' + coluna"
+            />
+          </th>
+        </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let linha of dados.linhas">
+        <tr *ngFor="let linha of linhasFiltradas">
           <td *ngFor="let coluna of dados.colunas">{{ linha[coluna] }}</td>
+        </tr>
+        <tr *ngIf="linhasFiltradas.length === 0">
+          <td [attr.colspan]="dados.colunas.length" class="status">
+            Nenhum resultado encontrado.
+            <button type="button" class="limpar" (click)="limparFiltros()">Limpar filtros</button>
+          </td>
         </tr>
       </tbody>
     </table>
