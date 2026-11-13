@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { PaginaService } from '../../services/pagina.service';
 
 @Component({
   selector: 'app-nav-horizontal',
@@ -10,11 +11,17 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './nav-horizontal.component.css',
 })
 export class NavHorizontalComponent {
+  private readonly paginaService = inject(PaginaService);
+
   links = [
-    { rotulo: 'Literatura', rota: '/literatura' },
-    { rotulo: 'Mídias', rota: '/midias' },
-    { rotulo: 'Música', rota: '/musica' },
-    { rotulo: 'Blog', rota: '/blog' },
-    { rotulo: 'Lojas', rota: '/lojas' },
+    { rotulo: 'Literatura', pagina: 'literatura' },
+    { rotulo: 'Mídias', pagina: 'midias' },
+    { rotulo: 'Música', pagina: 'musica' },
+    { rotulo: 'Blog', pagina: 'blog' },
+    { rotulo: 'Lojas', pagina: 'lojas' },
   ];
+
+  selecionar(pagina: string): void {
+    this.paginaService.selecionar(pagina);
+  }
 }

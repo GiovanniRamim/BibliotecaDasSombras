@@ -1,0 +1,19 @@
+<section class="base">
+  @switch (pagina$ | async) {
+    @case ('literatura') {
+      <app-literatura></app-literatura>
+    }
+    @case ('musica') {
+      <app-musica></app-musica>
+    }
+    @case ('midias') {
+      <app-midias></app-midias>
+    }
+    @case ('lojas') {
+      <app-lojas></app-lojas>
+    }
+    @case ('blog') {
+      <app-blog></app-blog>
+    }
+  }
+</section>
